@@ -7,3 +7,7 @@ Provides feed of vim patches
     $ sqlite3 patches.db < patches.sql
     $ go build
     $ ./vim-jp-patches
+
+## Author
+
+Yasuhiro Matsumoto
