@@ -88,6 +88,8 @@ type Item struct {
 }
 
 func main() {
+	flag.Parse()
+
 	var mutex sync.Mutex
 
 	db, err := sql.Open("sqlite3", "./patches.db")
