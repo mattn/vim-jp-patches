@@ -5,9 +5,9 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
-    "github.com/hoisie/web"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/hoisie/web"
+	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
 	"net/url"
@@ -49,7 +49,7 @@ func updatePatches(db *sql.DB) {
 			break
 		}
 	}
-	lines = lines[s+1:e]
+	lines = lines[s+1 : e]
 
 	tp := regexp.MustCompile(`^\s+\d+\s+(\S+)\s+(.*)$`)
 
@@ -65,7 +65,7 @@ func updatePatches(db *sql.DB) {
 		_, err = tx.Exec(sql, parts[1], parts[2], "", time.Now())
 		if err == nil {
 			sha1h := sha1.New()
-			fmt.Fprint(sha1h, "vim_jp" + secret)
+			fmt.Fprint(sha1h, "vim_jp"+secret)
 			params := make(url.Values)
 			params.Set("room", "vim")
 			params.Set("bot", "vim_jp")
@@ -80,11 +80,11 @@ func updatePatches(db *sql.DB) {
 }
 
 type Item struct {
-	Id string
-	Title string
-	Link string
+	Id          string
+	Title       string
+	Link        string
 	Description string
-	Created time.Time
+	Created     time.Time
 }
 
 func main() {
@@ -139,12 +139,12 @@ func main() {
 				ctx.Abort(http.StatusInternalServerError, err.Error())
 				return ""
 			}
-			items = append(items, Item {
-				Id: name,
-				Title: name,
-				Link: fmt.Sprintf("%s%s", uri, name),
+			items = append(items, Item{
+				Id:          name,
+				Title:       name,
+				Link:        fmt.Sprintf("%s%s", uri, name),
 				Description: title,
-				Created: created_at,
+				Created:     created_at,
 			})
 		}
 		ctx.SetHeader("Content-Type", "application/rss+xml", true)
